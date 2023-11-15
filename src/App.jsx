@@ -4,12 +4,14 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ProTip from './ProTip';
 import Copyright from './Copyright';
+import {Register} from "./Components/RegisterPage";
+import {Login} from "./Components/LoginPage";
 import {Button, ImageList, ImageListItem, Stack, TextField} from "@mui/material";
-
+// import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const darkTheme = createTheme({
+export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     },
@@ -67,25 +69,18 @@ const itemData = [
 
 export default function App() {
 
-    return (
-        <ThemeProvider theme={darkTheme}>
-            <CssBaseline/>
-            <Container maxWidth="sm">
-                <Box sx={{my: 4}}>
-                    {/*<Typography variant="h4" component="h1" gutterBottom>*/}
-                    {/*    Material UI Vite.js example*/}
-                    {/*</Typography>*/}
-                    {/*<ProTip/>*/}
-                    {/*<ImageGrid></ImageGrid>*/}
+    return (<Login></Login>);
+}
 
-                    {/*<Copyright/>*/}
-                    <Register></Register>
-
-
-                </Box>
-            </Container>
-        </ThemeProvider>
-    );
+function Page({component: Component}) {
+    return (<ThemeProvider theme={darkTheme}>
+        <CssBaseline/>
+        <Container maxWidth="sm">
+            <Box sx={{my: 4}}>
+                <Component></Component>
+            </Box>
+        </Container>
+    </ThemeProvider>)
 }
 
 function ImageGrid() {
