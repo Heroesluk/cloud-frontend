@@ -51,7 +51,7 @@ on:
 env:
   PROJECT_ID: ageless-webbing-405115 # TODO: update Google Cloud project id
   GAR_LOCATION: europe-west1 # TODO: update Artifact Registry location
-  SERVICE: cloud-frontend2137 # TODO: update Cloud Run service name
+  SERVICE: cloud/cloud-frontend # TODO: update Cloud Run service name
   REGION: europe-west1  # TODO: update Cloud Run service region
 
 jobs:
@@ -108,7 +108,7 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v0
         with:
-          service: ${{ env.SERVICE }}
+          service: image-cloud2137
           region: ${{ env.REGION }}
           allow-unauthenticated: true
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
