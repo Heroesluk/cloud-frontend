@@ -10,6 +10,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Link } from 'react-router-dom';
 
 export default function ButtonAppBar({visible}) {
     return (
@@ -27,20 +28,26 @@ export default function ButtonAppBar({visible}) {
                 <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                     <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
                 </Typography>
-                {visible ? <><Button sx={{
-                    pl: 1.5,
-                    pr: 1.5,
-                }} color="inherit">Login</Button>
-                    <Button sx={{
-                        ml: 3,
-                        pl: 1.5,
-                        pr: 1.5,
-                        backgroundColor: "white",
-                        color: "black", borderRadius: 0,
-                    }}
-                    >Sign up</Button></> : null}
-
-
+                {visible ? ( <><Button sx={{ 
+                            pl: 1.5, 
+                            pr: 1.5 
+                        }} color="inherit"
+                            component={Link}
+                            to="/login"
+                        >
+                            Login
+                        </Button>
+                        <Button
+                            sx={{
+                                ml: 3,
+                                pl: 1.5,
+                                pr: 1.5,
+                                backgroundColor: "white",
+                                color: "black", borderRadius: 0,
+                            }}
+                            component={Link}
+                            to="/register" >
+                            Sign up </Button></>) : null}
             </Toolbar>
         </AppBar>
 
