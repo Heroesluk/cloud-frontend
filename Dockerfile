@@ -1,7 +1,9 @@
 FROM node:18.15.0 as build
 WORKDIR /cloud-frontend
 
-ENV PORT 80
+ENV PORT 8080
+EXPOSE 8080
+
 
 COPY package*.json .
 RUN npm install
