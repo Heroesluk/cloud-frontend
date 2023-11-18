@@ -4,20 +4,51 @@ import {ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import {darkTheme} from "../App";
-
+import {darkTheme, lightTheme} from "../App";
+import ButtonAppBar from "../Components/Bar";
+import Typography from "@mui/material/Typography";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import {Background2} from "./FirstPage";
 export function Login() {
+    const [value, setValue] = React.useState(null);
+
+
     return (<ThemeProvider theme={darkTheme}>
         <CssBaseline/>
-        <Container maxWidth="sm">
-            <Box sx={{my: 4}}>
-                <Stack spacing={2}>
-                    <TextField id="login" label="Login" variant="outlined"/>
-                    <TextField id="password" label="password" variant="outlined"/>
-                    <Button variant="contained">Confirm</Button>
-                </Stack>
+        <Background2 imageUrl={'/imageLogin.jpg'}>
+            <ButtonAppBar></ButtonAppBar>
+            <Box p='25vh'
+                 display="flex"
+                 flexDirection='column'
+                 justifyContent="flex-start"
+                 alignItems="center"
+                 minHeight="87vh"
+            >
+                <ThemeProvider theme={lightTheme}>
+                    <Stack spacing={2} sx={{
+                        background: 'white',
+                        pl: 4, pr: 4, pt: 4, pb: 4, borderRadius: 1,
+
+                    }}>
+                        <div style={{color: "black", fontSize: "1.8vh", textAlign: "center"}}>Log in to ImageCloud</div>
+                        <TextField id="login" label="login" variant="outlined"/>
+                        <TextField id="password" label="password" variant="outlined"/>
+                        <Button variant="contained">Confirm</Button>
+                        <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
+                            Not a Flickr member?
+                            <span style={{color: "blue"}}> Sign up here.</span>
+                        </div>
+                    </Stack>
+
+                </ThemeProvider>
+
 
             </Box>
-        </Container>
+
+
+        </Background2>
+
+
     </ThemeProvider>)
 }

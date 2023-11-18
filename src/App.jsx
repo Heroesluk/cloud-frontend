@@ -15,6 +15,12 @@ export const darkTheme = createTheme({
         mode: 'dark',
     }
 });
+
+export const lightTheme = createTheme({
+    palette: {
+        mode: 'light',
+    }
+});
 const itemData = [
     {
         img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
