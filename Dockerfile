@@ -1,8 +1,7 @@
 FROM node:18.15.0 as build
 WORKDIR /cloud-frontend
 
-ENV PORT 8080
-EXPOSE 8080
+ENV PORT 80
 
 
 COPY package*.json .
