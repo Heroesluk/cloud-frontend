@@ -4,12 +4,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ProTip from './ProTip';
 import Copyright from './Copyright';
-import {Register} from "./Components/RegisterPage";
-import {Login} from "./Components/LoginPage";
+import {Register} from "./pages/RegisterPage";
+import {Login} from "./pages/LoginPage";
 import {Button, ImageList, ImageListItem, Stack, TextField} from "@mui/material";
-// import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import {Page} from "./pages/FirstPage";
 
 export const darkTheme = createTheme({
     palette: {
@@ -69,18 +69,13 @@ const itemData = [
 
 export default function App() {
 
-    return (<Login></Login>);
-}
-
-function Page({component: Component}) {
-    return (<ThemeProvider theme={darkTheme}>
-        <CssBaseline/>
-        <Container maxWidth="sm">
-            <Box sx={{my: 4}}>
-                <Component></Component>
-            </Box>
-        </Container>
-    </ThemeProvider>)
+    return (<BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Page/>}/>
+            <Route path="/Login" element={<Login/>}/>
+            <Route path="/Register" element={<Register/>}/>
+        </Routes>
+    </BrowserRouter>);
 }
 
 function ImageGrid() {
