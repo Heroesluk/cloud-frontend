@@ -15,17 +15,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-
-export const Background2 = styled('div')(({imageUrl}) => ({
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backgroundImage: `url(${imageUrl})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-}));
-
+import {Background2} from "../Components/Background2";
 export function Page() {
     const [value, setValue] = React.useState(null);
 

@@ -9,7 +9,9 @@ import ButtonAppBar from "../Components/Bar";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import {Background2} from "./FirstPage";
+import {Background2} from "../Components/Background2";
+
+
 export function Login() {
     const [value, setValue] = React.useState(null);
 

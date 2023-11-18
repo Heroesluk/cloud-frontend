@@ -9,7 +9,7 @@ import ButtonAppBar from "../Components/Bar";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import {Background2} from "./FirstPage";
+import {Background2} from "../Components/Background2";
 
 export function Register() {
     const [value, setValue] = React.useState(null);
@@ -32,7 +32,8 @@ export function Register() {
                         pl: 4, pr: 4, pt: 4, pb: 4, borderRadius: 1,
 
                     }}>
-                        <div style={{color: "black", fontSize: "1.8vh", textAlign: "center"}}>Register to ImageCloud</div>
+                        <div style={{color: "black", fontSize: "1.8vh", textAlign: "center"}}>Register to ImageCloud
+                        </div>
                         <TextField required id="login" label="login" variant="outlined"/>
                         <TextField required id="email" label="email" variant="outlined"/>
                         <TextField required id="password" label="password" variant="outlined"/>
@@ -40,7 +41,7 @@ export function Register() {
 
                         <Button variant="contained">Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
-                           Already have an account?
+                            Already have an account?
                             <span style={{color: "blue"}}> Login here.</span>
                         </div>
                     </Stack>
