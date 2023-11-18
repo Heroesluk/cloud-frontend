@@ -10,11 +10,10 @@ import {Button, ImageList, ImageListItem, Stack, TextField} from "@mui/material"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import {Page} from "./pages/FirstPage";
-
 export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
-    },
+    }
 });
 const itemData = [
     {
