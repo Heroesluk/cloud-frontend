@@ -11,8 +11,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-export default function ButtonAppBar() {
-
+export default function ButtonAppBar({visible}) {
     return (
         <AppBar position="static" style={{background: 'rgba(0,0,0,0.5)', boxShadow: 'none'}}>
             <Toolbar>
@@ -28,19 +27,19 @@ export default function ButtonAppBar() {
                 <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                     <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
                 </Typography>
-                <Button sx={{
+                {visible ? <><Button sx={{
                     pl: 1.5,
                     pr: 1.5,
-
                 }} color="inherit">Login</Button>
-                <Button sx={{
-                    ml: 3,
-                    pl: 1.5,
-                    pr: 1.5,
-                    backgroundColor: "white",
-                    color: "black", borderRadius: 0,
-                }}
-                >Sign up</Button>
+                    <Button sx={{
+                        ml: 3,
+                        pl: 1.5,
+                        pr: 1.5,
+                        backgroundColor: "white",
+                        color: "black", borderRadius: 0,
+                    }}
+                    >Sign up</Button></> : null}
+
 
             </Toolbar>
         </AppBar>

@@ -17,7 +17,7 @@ export function Login() {
     return (<ThemeProvider theme={darkTheme}>
         <CssBaseline/>
         <Background2 imageUrl={'/imageLogin.jpg'}>
-            <ButtonAppBar></ButtonAppBar>
+            <ButtonAppBar visible={false}></ButtonAppBar>
             <Box p='25vh'
                  display="flex"
                  flexDirection='column'
@@ -36,7 +36,7 @@ export function Login() {
                         <TextField id="password" label="password" variant="outlined"/>
                         <Button variant="contained">Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
-                            Not a Flickr member?
+                            Not a ImageCloud member?
                             <span style={{color: "blue"}}> Sign up here.</span>
                         </div>
                     </Stack>

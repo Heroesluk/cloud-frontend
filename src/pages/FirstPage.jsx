@@ -33,7 +33,7 @@ export function Page() {
     return (<ThemeProvider theme={darkTheme}>
         <CssBaseline/>
         <Background2 imageUrl={'/image1.jpg'}>
-            <ButtonAppBar></ButtonAppBar>
+            <ButtonAppBar visible={true}></ButtonAppBar>
             <Box p='25vh'
                  display="flex"
                  flexDirection='column'

@@ -4,12 +4,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ProTip from './ProTip';
 import Copyright from './Copyright';
-import {Register} from "./pages/RegisterPage";
 import {Login} from "./pages/LoginPage";
 import {Button, ImageList, ImageListItem, Stack, TextField} from "@mui/material";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import {Page} from "./pages/FirstPage";
+import {Register} from "./pages/RegisterPage";
 export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
