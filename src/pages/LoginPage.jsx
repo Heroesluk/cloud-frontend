@@ -44,13 +44,7 @@ export function Login() {
                     </Stack>
 
                 </ThemeProvider>
-
-
             </Box>
-
-
         </Background2>
-
-
     </ThemeProvider>)
 }
