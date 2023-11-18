@@ -51,7 +51,7 @@ on:
 env:
   PROJECT_ID: ageless-webbing-405115 # TODO: update Google Cloud project id
   GAR_LOCATION: europe-west1 # TODO: update Artifact Registry location
-  SERVICE: cloud/cloud-frontend # TODO: update Cloud Run service name
+  SERVICE: cloud-frontend2137 # TODO: update Cloud Run service name
   REGION: europe-west1  # TODO: update Cloud Run service region
 
 jobs:
