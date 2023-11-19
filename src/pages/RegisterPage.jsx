@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {Background2} from "../Components/Background2";
+import { Link } from 'react-router-dom';
 
 export function Register() {
     const [value, setValue] = React.useState(null);
@@ -42,7 +43,7 @@ export function Register() {
                         <Button variant="contained">Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
                             Already have an account?
-                            <span style={{color: "blue"}}> Login here.</span>
+                            <span style={{color: "blue"}}> <Link to="/login">Login here.</Link></span>
                         </div>
                     </Stack>
 
