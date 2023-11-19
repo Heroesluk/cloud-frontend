@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {Background2} from "../Components/Background2";
-
+import { Link } from 'react-router-dom';
 
 export function Login() {
     const [value, setValue] = React.useState(null);
@@ -39,7 +39,7 @@ export function Login() {
                         <Button variant="contained">Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
                             Not a ImageCloud member?
-                            <span style={{color: "blue"}}> Sign up here.</span>
+                            <span style={{color: "blue"}}> <Link to="/register"> Sign up here.</Link></span>
                         </div>
                     </Stack>
 
