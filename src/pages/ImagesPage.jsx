@@ -8,12 +8,41 @@ import {itemData, shuffle} from "../Helper/helper";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import ButtonAppBar from "../Components/Bar";
-import {ImageListItemBar} from "@mui/material";
+import {Button, ImageListItemBar} from "@mui/material";
 import Tooltip from '@mui/material/Tooltip';
-import {useRef} from "react";
+import {useRef, useState} from "react";
+
+const Butt = ({disp}) => {
+    console.log({disp})
+    return (
+        <Button
+            style={{
+                verticalAlign: "bottom",
+                opacity: disp,
+                backgroundColor: 'blue',
+            }}
+            variant="contained"
+        >
+            {disp}
+        </Button>
+    );
+};
 
 export default function ImagesPage() {
-    const boundingElement = useRef();
+
+    const [disp, setDisp] = useState(0);
+    const showButton = (e) => {
+        e.preventDefault();
+        setDisp(1);
+
+    };
+
+    const hideButton = (e) => {
+        e.preventDefault();
+        setDisp(0);
+
+    };
+
     const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
         <CssBaseline/>
@@ -26,7 +55,11 @@ export default function ImagesPage() {
                        mr: 0,
                        mt: '10vh',
                    }}>
-            <div style={{width: '65%'}}><Typography variant='h1' sx={{fontWeight: '500'}}>Your photos:</Typography>
+            <div onMouseEnter={(e) => showButton(e)}
+                 onMouseLeave={(e) => hideButton(e)}
+                 style={{width: '65%', backgroundColor: "red"}}><Typography variant='h1' sx={{fontWeight: '500'}}>Your
+                photos:
+                <Butt disp={disp}/></Typography>
             </div>
 
 
@@ -45,7 +78,6 @@ export default function ImagesPage() {
                                 ]
                             }
                         }}
-
                         placement="bottom" title={`${item.title}`}>
                         <ImageListItem key={item.img}>
                             <img
@@ -57,8 +89,6 @@ export default function ImagesPage() {
                         </ImageListItem>
 
                     </Tooltip>
-
-
                 ))}
             </ImageList>
 
