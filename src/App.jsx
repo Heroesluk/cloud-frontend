@@ -10,12 +10,13 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import {Page} from "./pages/FirstPage";
 import {Register} from "./pages/RegisterPage";
+import ImagesPage from "./pages/ImagesPage";
+
 export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     }
 });
-
 
 
 export const lightTheme = createTheme({
@@ -31,6 +32,8 @@ export default function App() {
             <Route path="/" element={<Page/>}/>
             <Route path="/Login" element={<Login/>}/>
             <Route path="/Register" element={<Register/>}/>
+            <Route path="/Images" element={<ImagesPage/>}/>
+
         </Routes>
     </BrowserRouter>);
 }

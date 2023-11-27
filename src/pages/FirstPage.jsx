@@ -1,21 +1,16 @@
 import {ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {darkTheme} from "../App";
-import cover from "/image1.jpg";
-import {styled} from "@mui/material";
 import ButtonAppBar from "../Components/Bar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-
 import {Background2} from "../Components/Background2";
+import {Link} from "react-router-dom";
+
 export function Page() {
     const [value, setValue] = React.useState(null);
 
@@ -49,7 +44,10 @@ export function Page() {
                     borderRadius: 1,
                     backgroundColor: "white",
                     color: "black"
-                }} variant="contained">Confirm</Button>
+                }} variant="contained"
+                        component={Link}
+                        to="/login">Start now
+                </Button>
             </Box>
 
             <BottomNavigation
