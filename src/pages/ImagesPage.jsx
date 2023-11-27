@@ -15,21 +15,23 @@ import {useRef, useState} from "react";
 const Butt = ({disp}) => {
     console.log({disp})
     return (
-        <Button
+        <div
             style={{
-                verticalAlign: "bottom",
+                position: 'absolute',
+                bottom: '0px',
+                width: '100%',
                 opacity: disp,
-                backgroundColor: 'blue',
+                backgroundColor: 'rgba(0,0,0,0.4)',
+                color: "white",
+                textAlign: "center"
             }}
-            variant="contained"
         >
-            {disp}
-        </Button>
+            <Typography variant='h6'>norm</Typography>
+        </div>
     );
 };
 
-export default function ImagesPage() {
-
+const ImageEntry = ({item}) => {
     const [disp, setDisp] = useState(0);
     const showButton = (e) => {
         e.preventDefault();
@@ -43,58 +45,56 @@ export default function ImagesPage() {
 
     };
 
-    const ar = shuffle(itemData)
+    return (
+        <ImageListItem
+            onMouseEnter={(e) => showButton(e)}
+            onMouseLeave={(e) => hideButton(e)}
+            key={item.img}>
+            <Butt disp={disp}/>
+
+            <img
+                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                alt={item.title}
+                loading="lazy"
+            />
+        </ImageListItem>
+    )
+}
+
+export default function ImagesPage() {
+
+    // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
-        <CssBaseline/>
-        <ButtonAppBar></ButtonAppBar>
-        <Container maxWidth={false}
-                   sx={{
-                       display: 'flex',
-                       alignItems: 'center',
-                       flexDirection: 'column',
-                       mr: 0,
-                       mt: '10vh',
-                   }}>
-            <div onMouseEnter={(e) => showButton(e)}
-                 onMouseLeave={(e) => hideButton(e)}
-                 style={{width: '65%', backgroundColor: "red"}}><Typography variant='h1' sx={{fontWeight: '500'}}>Your
-                photos:
-                <Butt disp={disp}/></Typography>
-            </div>
+            <CssBaseline/>
+            <ButtonAppBar></ButtonAppBar>
+            <Container maxWidth={false}
+                       sx={{
+                           display: 'flex',
+                           alignItems: 'center',
+                           flexDirection: 'column',
+                           mr: 0,
+                           mt: '10vh',
+                       }}>
+                <div style={{width: '65%'}}>
+                    <Typography variant='h1' sx={{fontWeight: '500'}}>Your
+                        photos: </Typography>
+                </div>
 
 
-            <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
-                {ar.map((item) => (
-                    <Tooltip
-                        PopperProps={{
-                            popperOptions: {
-                                modifiers: [
-                                    {
-                                        name: "offset",
-                                        options: {
-                                            offset: [0, -40],
-                                        }
-                                    }
-                                ]
-                            }
-                        }}
-                        placement="bottom" title={`${item.title}`}>
-                        <ImageListItem key={item.img}>
-                            <img
-                                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
+                <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
+                    {itemData.map((item) => (
 
-                    </Tooltip>
-                ))}
-            </ImageList>
+                        <ImageEntry item={item}></ImageEntry>
 
-        </Container>
+                    ))}
+                </ImageList>
 
-    </ThemeProvider>)
+            </Container>
+
+        </ThemeProvider>
+    )
+
 }
 
 
