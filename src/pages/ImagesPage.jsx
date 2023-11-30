@@ -11,6 +11,8 @@ import ButtonAppBar from "../Components/Bar";
 import {Button, ImageListItemBar} from "@mui/material";
 import Tooltip from '@mui/material/Tooltip';
 import {useRef, useState} from "react";
+import { Modal, IconButton, Box } from '@mui/material';
+import { Close as CloseIcon, GetApp as GetAppIcon } from '@mui/icons-material';
 
 const Butt = ({disp}) => {
     console.log({disp})
@@ -31,7 +33,7 @@ const Butt = ({disp}) => {
     );
 };
 
-const ImageEntry = ({item}) => {
+const ImageEntry = ({ item, setModalOpen, setSelectedImage }) => {
     const [disp, setDisp] = useState(0);
     const showButton = (e) => {
         e.preventDefault();
@@ -44,7 +46,10 @@ const ImageEntry = ({item}) => {
         setDisp(0);
 
     };
-
+    const handleImageClick = () => {
+        setModalOpen(true);
+        setSelectedImage(item.img);
+      };
     return (
         <ImageListItem
             onMouseEnter={(e) => showButton(e)}
@@ -53,6 +58,7 @@ const ImageEntry = ({item}) => {
             <Butt disp={disp}/>
 
             <img
+                onClick={handleImageClick}
                 srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                 src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
                 alt={item.title}
@@ -63,7 +69,9 @@ const ImageEntry = ({item}) => {
 }
 
 export default function ImagesPage() {
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+   
     // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
             <CssBaseline/>
@@ -85,10 +93,53 @@ export default function ImagesPage() {
                 <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
                     {itemData.map((item) => (
 
-                        <ImageEntry item={item}></ImageEntry>
+                        <ImageEntry
+                            key={item.img}
+                            item={item}
+                            setModalOpen={setModalOpen}
+                            setSelectedImage={setSelectedImage}></ImageEntry>
 
                     ))}
                 </ImageList>
+                <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+                    <Box
+                        sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        bgcolor: "background.paper",
+                        boxShadow: 24,
+                        p: 4,
+                        maxWidth: "95vw",
+                        maxHeight: "95vh",
+                        overflow: "auto",
+                        }}
+                    >
+                        <IconButton
+                        onClick={() => setModalOpen(false)}
+                        style={{ position: "absolute", top: 0, right: 0, color: "black" }}
+                        >
+                        <CloseIcon />
+                        <Typography variant="caption" sx={{ marginLeft: 1 }}>Close</Typography>
+                        </IconButton>
+                        <img src={selectedImage} alt="Full Resolution" style={{ width: "100%" }} />
+                        <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginTop: 2,
+                        }}
+                        >
+                        <IconButton onClick={() => window.open(selectedImage, "_blank")} style={{ color: "black" }}>
+                            <GetAppIcon />
+                            <Typography variant="caption" sx={{ marginLeft: 1 }}>Download</Typography>
+                        </IconButton>
+                        </Box>
+                    </Box>
+                </Modal>
+
+
 
             </Container>
 
@@ -96,7 +147,4 @@ export default function ImagesPage() {
     )
 
 }
-
-
-
 
