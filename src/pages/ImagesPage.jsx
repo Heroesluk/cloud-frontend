@@ -11,11 +11,11 @@ import ButtonAppBar from "../Components/Bar";
 import {Button, ImageListItemBar} from "@mui/material";
 import Tooltip from '@mui/material/Tooltip';
 import {useRef, useState} from "react";
-import { Modal, IconButton, Box } from '@mui/material';
-import { Close as CloseIcon, GetApp as GetAppIcon } from '@mui/icons-material';
+import {Modal, IconButton, Box} from '@mui/material';
+import {Close as CloseIcon, GetApp as GetAppIcon} from '@mui/icons-material';
+import {CustomModal} from "../Components/ImageClickPopup";
 
 const Butt = ({disp}) => {
-    console.log({disp})
     return (
         <div
             style={{
@@ -33,7 +33,7 @@ const Butt = ({disp}) => {
     );
 };
 
-const ImageEntry = ({ item, setModalOpen, setSelectedImage }) => {
+const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
     const [disp, setDisp] = useState(0);
     const showButton = (e) => {
         e.preventDefault();
@@ -49,7 +49,7 @@ const ImageEntry = ({ item, setModalOpen, setSelectedImage }) => {
     const handleImageClick = () => {
         setModalOpen(true);
         setSelectedImage(item.img);
-      };
+    };
     return (
         <ImageListItem
             onMouseEnter={(e) => showButton(e)}
@@ -69,9 +69,9 @@ const ImageEntry = ({ item, setModalOpen, setSelectedImage }) => {
 }
 
 export default function ImagesPage() {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-   
+    const [modalOpen, setModalOpen] = React.useState(false);
+    const [selectedImage, setSelectedImage] = React.useState(null);
+
     // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
             <CssBaseline/>
@@ -101,44 +101,12 @@ export default function ImagesPage() {
 
                     ))}
                 </ImageList>
-                <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-                    <Box
-                        sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        bgcolor: "background.paper",
-                        boxShadow: 24,
-                        p: 4,
-                        maxWidth: "95vw",
-                        maxHeight: "95vh",
-                        overflow: "auto",
-                        }}
-                    >
-                        <IconButton
-                        onClick={() => setModalOpen(false)}
-                        style={{ position: "absolute", top: 0, right: 0, color: "black" }}
-                        >
-                        <CloseIcon />
-                        <Typography variant="caption" sx={{ marginLeft: 1 }}>Close</Typography>
-                        </IconButton>
-                        <img src={selectedImage} alt="Full Resolution" style={{ width: "100%" }} />
-                        <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginTop: 2,
-                        }}
-                        >
-                        <IconButton onClick={() => window.open(selectedImage, "_blank")} style={{ color: "black" }}>
-                            <GetAppIcon />
-                            <Typography variant="caption" sx={{ marginLeft: 1 }}>Download</Typography>
-                        </IconButton>
-                        </Box>
-                    </Box>
-                </Modal>
 
+                <CustomModal
+                    open={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                    selectedImage={selectedImage}
+                />
 
 
             </Container>
