@@ -2,22 +2,20 @@ import {Button, Stack, TextField} from "@mui/material";
 import * as React from "react";
 import {ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import {darkTheme, lightTheme} from "../App";
+import {darkTheme, lightTheme, UserContext} from "../App";
 import ButtonAppBar from "../Components/Bar";
-import Typography from "@mui/material/Typography";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {Background2} from "../Components/Background2";
 import {Link, redirect, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {useState} from "react";
+import {useContext, useState} from "react";
 
 export function Login() {
     const [value, setValue] = useState(null);
     const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
+    const { setUser, setToken} = useContext(UserContext);
+
 
     const handleLogin = async () => {
         const login = document.getElementById('login').value;
@@ -39,7 +37,9 @@ export function Login() {
 
         try {
             const response = await axios.post('http://127.0.0.1:5000/login', data);
-            console.log('Login successful:', response.data['access_token']);
+            console.log('Login successful:');
+            setUser(data.username)
+            setToken(response.data['access_token'])
             navigate("/images");
 
         } catch (error) {

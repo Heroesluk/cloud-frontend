@@ -10,11 +10,19 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {IconButton} from "@mui/material";
+import {FileUploadOutlined} from "@mui/icons-material";
 
-export default function ButtonAppBar({visible}) {
+export default function ButtonAppBar({visible, upload}) {
+    let bar;
+    if (visible) {
+        bar = 'rgba(0,0,0,0.5)';
+    } else {
+        bar = 'rgba(0,0,0)'
+    }
     return (
-        <AppBar position="static" style={{background: 'rgba(0,0,0,0.5)', boxShadow: 'none'}}>
+        <AppBar position="static" style={{background: bar, boxShadow: 'none'}}>
             <Toolbar>
                 <Box
                     size="large"
@@ -28,26 +36,48 @@ export default function ButtonAppBar({visible}) {
                 <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                     <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
                 </Typography>
-                {visible ? ( <><Button sx={{ 
-                            pl: 1.5, 
-                            pr: 1.5 
-                        }} color="inherit"
-                            component={Link}
-                            to="/login"
-                        >
-                            Login
-                        </Button>
-                        <Button
-                            sx={{
-                                ml: 3,
-                                pl: 1.5,
-                                pr: 1.5,
-                                backgroundColor: "white",
-                                color: "black", borderRadius: 0,
-                            }}
-                            component={Link}
-                            to="/register" >
-                            Sign up </Button></>) : null}
+
+                <Box
+                    display="flex"
+                    flexDirection='row'
+                    gap='10px'
+                >
+                    <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
+                        Upload
+                    </Typography>
+                    <IconButton sx={{
+                        backgroundColor: "white",
+                    }} component="label">
+                        <FileUploadOutlined/>
+                        <input
+                            styles={{display: "none"}}
+                            type="file"
+                            hidden
+                            onChange={console.log("ok")}
+                            name="[licenseFile]"
+                        />
+                    </IconButton>
+                </Box>
+
+                {visible ? (<><Button sx={{
+                    pl: 1.5,
+                    pr: 1.5
+                }} color="inherit"
+                                      component={Link}
+                                      to="/login">
+                    Login
+                </Button>
+                    <Button
+                        sx={{
+                            ml: 3,
+                            pl: 1.5,
+                            pr: 1.5,
+                            backgroundColor: "white",
+                            color: "black", borderRadius: 0,
+                        }}
+                        component={Link}
+                        to="/register">
+                        Sign up </Button></>) : null}
             </Toolbar>
         </AppBar>
 
