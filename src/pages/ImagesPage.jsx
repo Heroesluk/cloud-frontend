@@ -83,7 +83,8 @@ const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
 
 export default function ImagesPage() {
     const {user, token} = useContext(UserContext);
-    const [data, setData] = useState(null);
+    const [dt, setData] = useState(null);
+
 
     useEffect(() => {
         const fetch_data = async () => {
@@ -133,8 +134,7 @@ export default function ImagesPage() {
                 </div>
 
                 <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
-                    {example.data.map(item => (
-
+                    {dt && dt.data.map(item => (
                         <ImageEntry
                             key={item.url}
                             item={item}
