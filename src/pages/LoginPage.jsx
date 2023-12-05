@@ -69,7 +69,7 @@ export function Login() {
                         <div style={{color: "black", fontSize: "1.8vh", textAlign: "center"}}>Log in to ImageCloud</div>
                         <div id='errortext' style={{color: "red", fontSize: "1.8vh", textAlign: "center"}}></div>
                         <TextField error={hasError} id="login" label="login" variant="outlined"/>
-                        <TextField error={hasError} id="password" label="password" variant="outlined"/>
+                        <TextField error={hasError} id="password" type="password" label="password" variant="outlined"/>
                         <Button variant="contained" onClick={handleLogin}>Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
                             Not a ImageCloud member?
