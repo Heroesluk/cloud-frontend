@@ -87,6 +87,8 @@ export default function ImagesPage() {
 
 
     useEffect(() => {
+
+        // TODO: move this to external function
         const fetch_data = async () => {
             if (token !== null) {
                 try {
@@ -95,10 +97,8 @@ export default function ImagesPage() {
                             'Authorization': 'Bearer ' + token
                         }
                     });
-                    console.log('list got');
 
                     setData(response.data);
-                    console.log(data)
 
 
                 } catch (error) {
@@ -127,6 +127,20 @@ export default function ImagesPage() {
                            mr: 0,
                            mt: '10vh',
                        }}>
+
+                <IconButton sx={{
+                    backgroundColor: "white",
+                }} component="label">
+                    <FileUploadOutlined/>
+
+
+                    {/*this could be left for demo if ok*/}
+                    {/*<form action="http://127.0.0.1:5000/upload" method="post" encType="multipart/form-data">*/}
+                    {/*    <input type="file" name="photo" accept="image/*"/>*/}
+                    {/*    <input type="submit" value="Upload"/>*/}
+                    {/*</form>*/}
+
+                </IconButton>
 
                 <div style={{width: '65%'}}>
                     <Typography variant='h1' sx={{fontWeight: '500'}}>Your

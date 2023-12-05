@@ -11,6 +11,7 @@ import {Page} from "./pages/FirstPage";
 import {Register} from "./pages/RegisterPage";
 import ImagesPage from "./pages/ImagesPage";
 import {useState} from "react";
+import {UploadForm} from "./pages/UploadPage";
 
 export const darkTheme = createTheme({
     palette: {
@@ -41,6 +42,8 @@ export default function App() {
                     <Route path="/Login" element={<Login/>}/>
                     <Route path="/Register" element={<Register/>}/>
                     <Route path="/Images" element={<ImagesPage/>}/>
+                    <Route path="/Upload" element={<UploadForm/>}/>
+
 
                 </Routes>
             </UserContext.Provider>

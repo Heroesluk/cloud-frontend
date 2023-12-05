@@ -45,18 +45,7 @@ export default function ButtonAppBar({visible, upload}) {
                     <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                         Upload
                     </Typography>
-                    <IconButton sx={{
-                        backgroundColor: "white",
-                    }} component="label">
-                        <FileUploadOutlined/>
-                        <input
-                            styles={{display: "none"}}
-                            type="file"
-                            hidden
-                            onChange={console.log("ok")}
-                            name="[licenseFile]"
-                        />
-                    </IconButton>
+
                 </Box>
 
                 {visible ? (<><Button sx={{
