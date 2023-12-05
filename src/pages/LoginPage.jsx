@@ -10,12 +10,14 @@ import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {Background2} from "../Components/Background2";
-import { Link } from 'react-router-dom';
+import {Link, redirect, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {useState} from "react";
 
 export function Login() {
-    const [value, setValue] = React.useState(null);
-    const [hasError, setHasError] = React.useState(false);
+    const [value, setValue] = useState(null);
+    const [hasError, setHasError] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         const login = document.getElementById('login').value;
@@ -34,16 +36,18 @@ export function Login() {
             username: login,
             password: password
         };
-    
+
         try {
-            const response = await axios.post('http://localhost:8080/login', data);
-            console.log('Login successful:', response.data);
+            const response = await axios.post('http://127.0.0.1:5000/login', data);
+            console.log('Login successful:', response.data['access_token']);
+            navigate("/images");
+
         } catch (error) {
             console.error('Error during login:', error);
             errortext.innerText = 'Login or password incorrect!';
             setHasError(true);
         }
-      };
+    };
 
     return (<ThemeProvider theme={darkTheme}>
         <CssBaseline/>

@@ -64,9 +64,9 @@ export function Register() {
             email: email,
             password: password
         };
-    
+
         try {
-            const response = await axios.post('http://localhost:8080/register', data);
+            const response = await axios.post('http://127.0.0.1:5000/register', data);
             console.log('Registration successful:', response.data);
         } catch (error) {
             console.error('Error during registration:', error);
