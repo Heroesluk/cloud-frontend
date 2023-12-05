@@ -111,6 +111,26 @@ export default function ImagesPage() {
 
     }, []);
 
+    const uploadImage = async () => {
+        try {
+            axios.post('http://127.0.0.1:5000/upload', {
+                'file': document.getElementById('file-selector').files[0]
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+      
+          if (response.ok) {
+            console.log('Image uploaded successfully');
+          } else {
+            console.error('Failed to upload image');
+          }
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
+      };
 
     const [modalOpen, setModalOpen] = React.useState(false);
     const [selectedImage, setSelectedImage] = React.useState(null);
@@ -130,9 +150,16 @@ export default function ImagesPage() {
 
                 <IconButton sx={{
                     backgroundColor: "white",
-                }} component="label">
+                    }} component="label">
                     <FileUploadOutlined/>
-
+                    
+                    <input
+                        id="file-selector"
+                        type="file"
+                        style={{ display: 'none' }}
+                        onChange={uploadImage}
+                        accept="image/*"
+                    />
 
                     {/*this could be left for demo if ok*/}
                     {/*<form action="http://127.0.0.1:5000/upload" method="post" encType="multipart/form-data">*/}
