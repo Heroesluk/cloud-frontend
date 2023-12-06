@@ -113,20 +113,15 @@ export default function ImagesPage() {
 
     const uploadImage = async () => {
         try {
-            axios.post('http://127.0.0.1:5000/upload', {
+            const response = axios.post('http://127.0.0.1:8080/upload', {
                 'file': document.getElementById('file-selector').files[0]
             }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + token
                 }
-            })
-      
-          if (response.ok) {
-            console.log('Image uploaded successfully');
-          } else {
-            console.error('Failed to upload image');
-          }
+            });
+            console.log('Image uploaded successfully: ', response);
         } catch (error) {
           console.error('Error uploading image:', error);
         }
