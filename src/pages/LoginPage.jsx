@@ -39,7 +39,7 @@ export function Login() {
             const response = await axios.post('http://127.0.0.1:5000/login', data);
             console.log('Login successful:');
             setUser(data.username)
-            setToken(response.data['access_token'])
+            document.cookie=response.data['access_token']
             navigate("/images");
 
         } catch (error) {

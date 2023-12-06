@@ -32,7 +32,7 @@ export function UploadForm() {
         // Get the details of the files
 
         console.log(event.target.files)
-        formData.append("image", event.target.files[0]);
+        formData.append("file", event.target.files[0]);
 
     }
 }

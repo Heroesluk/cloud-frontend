@@ -14,20 +14,6 @@ import axios from "axios";
 import {Button, IconButton, TextField} from "@mui/material";
 import {FileUploadOutlined} from "@mui/icons-material";
 
-let example = {
-    "data": [
-        {
-            "folder_id": 11,
-            "id": 14,
-            "image_add_date": "Tue, 05 Dec 2023 18:39:26 GMT",
-            "image_size": 786486,
-            "name": "aaa.bmp",
-            "url": "https://storage.googleapis.com/cloud_image_bucket/11/aaa.bmp?Expires=1701881425&GoogleAccessId=cloud-storage-admin%40ageless-webbing-405115.iam.gserviceaccount.com&Signature=DM1zjzmhoar6dm491gmb9gCURco7XNmOnZjk%2BymlNn3mYPctCJz4K4p5qTA0b9I4jG%2Bm5FGXF1ZWAYmBlEAaSzDSc9172jgQkn%2F0cqZk7lVaEmhPeP0MJluh2SRALQDkQ9XGal%2BJPrbvckhIwYDiwkCIaqeCPIHAJO4s5EsWj%2Fb9P9tJykhVJmuI0GkCvvnEVrv%2BEu6T6PY2predgqNJLSKvGuAgL54mcwdj1tp9DRUQEcDHMkVyLE4sUY2hLqcQxem96BFgiw4B2AcEG%2FQbBJfnOUfBvp7eQdOYPyP7QEQ10EU8Vwr9lJNawLcCYUq6vpBqFrrIhlec6s3VqOVQ8Q%3D%3D"
-        }
-    ]
-}
-
-
 const Butt = ({disp}) => {
     return (
         <div
@@ -82,46 +68,48 @@ const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
 }
 
 export default function ImagesPage() {
-    const {user, token} = useContext(UserContext);
+    const token = document.cookie
     const [dt, setData] = useState(null);
+    const [upload, setUpload] = useState(false);
 
+    // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTg2ODEyNSwianRpIjoiYWIzODVlZjQtZmFjZi00NTAyLThhMGQtYjQzZDg0YzJhYjJmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imx1a2FzejIiLCJuYmYiOjE3MDE4NjgxMjUsImV4cCI6MTcwMTg2OTAyNX0.25co44R2gimIIqoJANdHYtdudxqz3ZCiSWxVV52B0o4"
+
+    const fetch_data = async () => {
+        if (token !== null) {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/available_files', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                setData(response.data);
+                console.log(dt);
+            } catch (error) {
+                console.error('Error during login:', error);
+            }
+        }
+    }
 
     useEffect(() => {
-
         // TODO: move this to external function
-        const fetch_data = async () => {
-            if (token !== null) {
-                try {
-                    const response = await axios.get('http://127.0.0.1:5000/available_files', {
-                        headers: {
-                            'Authorization': 'Bearer ' + token
-                        }
-                    });
 
-                    setData(response.data);
-
-
-                } catch (error) {
-                    console.error('Error during login:', error);
-                }
-            }
-
-        }
         fetch_data().then().finally();
+        console.log(dt);
 
     }, []);
 
     const uploadImage = async () => {
         try {
-            const response = axios.post('http://127.0.0.1:8080/upload', {
+            const response = axios.post('http://127.0.0.1:5000/upload', {
                 'file': document.getElementById('file-selector').files[0]
             }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + token
                 }
-            });
+            }).then(fetch_data().then().finally()).finally();
             console.log('Image uploaded successfully: ', response);
+            setUpload(!upload)
         } catch (error) {
           console.error('Error uploading image:', error);
         }
