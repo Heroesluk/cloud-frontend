@@ -47,7 +47,7 @@ const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
     };
     const handleImageClick = () => {
         setModalOpen(true);
-        setSelectedImage(item.url);
+        setSelectedImage(item);
     };
     return (
         <ImageListItem
@@ -99,15 +99,26 @@ export default function ImagesPage() {
     }, []);
 
     const uploadImage = async () => {
+        // try {
+        //     const response = axios.post('http://127.0.0.1:8080/upload', {
+        //         'file': document.getElementById('file-selector').files[0]
+        //     }, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data',
+        //             'Authorization': 'Bearer ' + token
+        //         }
+        //     }).then(fetch_data().then().finally()).finally();
         try {
-            const response = axios.post('http://127.0.0.1:5000/upload', {
-                'file': document.getElementById('file-selector').files[0]
-            }, {
+            const formData = new FormData();
+            formData.append('file', document.getElementById('file-selector').files[0]);
+    
+            await axios.post('http://127.0.0.1:5000/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + token
                 }
-            }).then(fetch_data().then().finally()).finally();
+            });    
+            await fetch_data();
             console.log('Image uploaded successfully: ', response);
             setUpload(!upload)
         } catch (error) {
