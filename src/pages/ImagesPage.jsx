@@ -13,6 +13,7 @@ import {CustomModal} from "../Components/ImageClickPopup";
 import axios from "axios";
 import {Button, IconButton, TextField} from "@mui/material";
 import {FileUploadOutlined} from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Butt = ({disp}) => {
     return (
@@ -31,41 +32,93 @@ const Butt = ({disp}) => {
         </div>
     );
 };
-
-const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
+const ImageEntry = ({ item, setModalOpen, setSelectedImage, onDelete }) => {
     const [disp, setDisp] = useState(0);
+  
     const showButton = (e) => {
-        e.preventDefault();
-        setDisp(1);
-
+      e.preventDefault();
+      setDisp(1);
     };
-
+  
     const hideButton = (e) => {
-        e.preventDefault();
-        setDisp(0);
-
+      e.preventDefault();
+      setDisp(0);
     };
+  
     const handleImageClick = () => {
-        setModalOpen(true);
-        setSelectedImage(item);
+      setModalOpen(true);
+      setSelectedImage(item);
     };
+  
+    const handleDelete = async () => {
+      // Call the onDelete function passed from the parent component
+      onDelete(item.id);
+    };
+  
     return (
-        <ImageListItem
-            onMouseEnter={(e) => showButton(e)}
-            onMouseLeave={(e) => hideButton(e)}
-            key={item.url}>
-            <Butt disp={disp}/>
+      <ImageListItem
+        onMouseEnter={(e) => showButton(e)}
+        onMouseLeave={(e) => hideButton(e)}
+        key={item.url}
+      >
+        <Butt disp={disp} />
+        <IconButton
+        style={{
+            position: "absolute",
+            top: "5px",
+            left: "5px",
+            color: "white",
+        }}
+        onClick={handleDelete}
+        >
+        <DeleteIcon />
+        </IconButton>
 
-            <img
-                onClick={handleImageClick}
-                srcSet={`${item.url}`}
-                src={`${item.url}`}
-                alt={item.name}
-                loading="lazy"
-            />
-        </ImageListItem>
-    )
-}
+        <img
+          onClick={handleImageClick}
+          srcSet={`${item.url}`}
+          src={`${item.url}`}
+          alt={item.name}
+          loading="lazy"
+        />
+      </ImageListItem>
+    );
+  };
+  
+// const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
+//     const [disp, setDisp] = useState(0);
+//     const showButton = (e) => {
+//         e.preventDefault();
+//         setDisp(1);
+
+//     };
+
+//     const hideButton = (e) => {
+//         e.preventDefault();
+//         setDisp(0);
+
+//     };
+//     const handleImageClick = () => {
+//         setModalOpen(true);
+//         setSelectedImage(item);
+//     };
+//     return (
+//         <ImageListItem
+//             onMouseEnter={(e) => showButton(e)}
+//             onMouseLeave={(e) => hideButton(e)}
+//             key={item.url}>
+//             <Butt disp={disp}/>
+
+//             <img
+//                 onClick={handleImageClick}
+//                 srcSet={`${item.url}`}
+//                 src={`${item.url}`}
+//                 alt={item.name}
+//                 loading="lazy"
+//             />
+//         </ImageListItem>
+//     )
+// }
 
 export default function ImagesPage() {
     const token = document.cookie
@@ -77,7 +130,7 @@ export default function ImagesPage() {
     const fetch_data = async () => {
         if (token !== null) {
             try {
-                const response = await axios.get('http://127.0.0.1:5000/available_files', {
+                const response = await axios.get('http://127.0.0.1:8080/available_files', {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
@@ -112,7 +165,7 @@ export default function ImagesPage() {
             const formData = new FormData();
             formData.append('file', document.getElementById('file-selector').files[0]);
     
-            await axios.post('http://127.0.0.1:5000/upload', formData, {
+            await axios.post('http://127.0.0.1:8080/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + token
@@ -129,6 +182,24 @@ export default function ImagesPage() {
     const [modalOpen, setModalOpen] = React.useState(false);
     const [selectedImage, setSelectedImage] = React.useState(null);
 
+    const deleteImage = async (imageId) => {
+        try {
+          await axios.post(
+            'http://127.0.0.1:8080/delete_image',
+            { image_id: imageId },
+            {
+              headers: {
+                Authorization: 'Bearer ' + token,
+              },
+            }
+          );
+    
+          await fetch_data();
+        } catch (error) {
+            console.error('Error deleting image:', error.response || error.message || error);
+        }
+      };
+    
     // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
             <CssBaseline/>
@@ -168,15 +239,17 @@ export default function ImagesPage() {
                         photos: </Typography>
                 </div>
 
-                <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
-                    {dt && dt.data.map(item => (
-                        <ImageEntry
-                            key={item.url}
-                            item={item}
-                            setModalOpen={setModalOpen}
-                            setSelectedImage={setSelectedImage}></ImageEntry>
-
-                    ))}
+                <ImageList variant="masonry" sx={{ width: '65%' }} cols={3}>
+        {dt &&
+          dt.data.map((item) => (
+            <ImageEntry
+              key={item.url}
+              item={item}
+              setModalOpen={setModalOpen}
+              setSelectedImage={setSelectedImage}
+              onDelete={deleteImage} // Pass the onDelete function
+            />
+          ))}
                 </ImageList>
 
                 <CustomModal
