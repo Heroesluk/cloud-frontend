@@ -115,23 +115,27 @@ export default function ImagesPage() {
     }, []);
 
     const uploadImage = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('file', document.getElementById('file-selector').files[0]);
+			const files = document.getElementById('file-selector').files;
 
-            await axios.post(ip + '/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + token
-                }
-            });
-            await fetch_data();
-            console.log('Image uploaded successfully: ', response);
-            setUpload(!upload)
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
-    };
+			for (let i = 0; i < files.length; i++) {
+					try {
+							const formData = new FormData();
+							formData.append('file', files[i]);
+	
+							await axios.post(ip + '/upload', formData, {
+									headers: {
+											'Content-Type': 'multipart/form-data',
+											'Authorization': 'Bearer ' + token
+									}
+							});    
+							await fetch_data();
+							console.log('Image uploaded successfully: ', response);
+							setUpload(!upload)
+					} catch (error) {
+							console.error('Error uploading image:', error);
+					}
+			}
+		};
 
     const [modalOpen, setModalOpen] = React.useState(false);
     const [selectedImage, setSelectedImage] = React.useState(null);
@@ -176,7 +180,8 @@ export default function ImagesPage() {
                         type="file"
                         style={{display: 'none'}}
                         onChange={uploadImage}
-                        accept="image/*"
+                        accept="image/*, application/zip"
+                        multiple
                     />
                 </IconButton>
 
