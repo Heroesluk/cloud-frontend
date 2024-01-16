@@ -25,20 +25,16 @@ export default function ButtonAppBar({visible, upload}) {
                     sx={{mr: 2}}
                 >
                     <CloudIcon style={{fontSize: "60px"}}/>
-                </Box>
-                <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
-                    <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
-                </Typography>
+                    </Box>
+                    <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
+                        <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
+                    </Typography>
 
                 <Box
                     display="flex"
                     flexDirection='row'
                     gap='10px'
                 >
-                    <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
-                        Upload
-                    </Typography>
-
                 </Box>
 
                 {visible ? (<><Button sx={{

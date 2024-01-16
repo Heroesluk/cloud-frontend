@@ -15,7 +15,7 @@ import {FileUploadOutlined} from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from '@mui/material/TextField';
 
-const Butt = ({disp}) => {
+const Butt = ({disp, name}) => {
     return (
         <div
             style={{
@@ -28,7 +28,7 @@ const Butt = ({disp}) => {
                 textAlign: "center"
             }}
         >
-            <Typography variant='h6'>norm</Typography>
+            <Typography variant='h6'>{name}</Typography>
         </div>
     );
 };
@@ -61,7 +61,7 @@ const ImageEntry = ({item, setModalOpen, setSelectedImage, onDelete}) => {
             onMouseEnter={(e) => showButton(e)}
             onMouseLeave={(e) => hideButton(e)}
             key={item.url}>
-            <Butt disp={disp}/>
+            <Butt disp={disp} name={item.name}/>
             <IconButton
                 style={{
                     position: "absolute",
@@ -171,29 +171,30 @@ export default function ImagesPage() {
                            mt: '10vh',
                        }}>
 
-                <IconButton sx={{
-                    backgroundColor: "white",
-                }} component="label">
-                    <FileUploadOutlined/>
-                    <input
-                        id="file-selector"
-                        type="file"
-                        style={{display: 'none'}}
-                        onChange={uploadImage}
-                        accept="image/*, application/zip"
-                        multiple
+                <div style={{marginBottom: '2%', width: '65%'}}>
+                    <Typography variant='h2' sx={{marginBottom: '5px', fontWeight: '500'}}>Your photos:</Typography>
+
+                    <IconButton sx={{
+                        backgroundColor: "white",
+                        marginRight: '10px',
+                        marginTop: '7px'
+                        }} component="label">
+                        <FileUploadOutlined/>
+                        <input
+                            id="file-selector"
+                            type="file"
+                            style={{display: 'none'}}
+                            onChange={uploadImage}
+                            accept="image/*, application/zip"
+                            multiple
+                        />
+                    </IconButton>
+
+                    <TextField
+                        label="Search by name"
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        value={searchQuery}
                     />
-                </IconButton>
-
-								<TextField
-									label="Search by name"
-									onChange={(e) => setSearchQuery(e.target.value)}
-									value={searchQuery}
-								/>
-
-                <div style={{width: '65%'}}>
-                    <Typography variant='h1' sx={{fontWeight: '500'}}>Your
-                        photos: </Typography>
                 </div>
 
                 <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
