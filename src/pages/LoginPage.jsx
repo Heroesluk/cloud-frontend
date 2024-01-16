@@ -1,14 +1,14 @@
 import {Button, Stack, TextField} from "@mui/material";
 import * as React from "react";
+import {useContext, useState} from "react";
 import {ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import {darkTheme, lightTheme, UserContext} from "../App";
+import {darkTheme, ip, lightTheme, UserContext} from "../App";
 import ButtonAppBar from "../Components/Bar";
 import {Background2} from "../Components/Background2";
-import {Link, redirect, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {useContext, useState} from "react";
 
 export function Login() {
     const [value, setValue] = useState(null);
@@ -36,7 +36,7 @@ export function Login() {
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/login', data);
+            const response = await axios.post(ip+'/login', data);
             console.log('Login successful:');
             setUser(data.username)
             document.cookie=response.data['access_token']

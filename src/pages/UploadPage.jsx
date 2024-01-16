@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useContext} from "react";
-import {UserContext} from "../App";
+import {ip, UserContext} from "../App";
 
 let formData = new FormData();
 
@@ -18,7 +18,7 @@ export function UploadForm() {
     )
 
     function postFile(event) {
-        axios.post('http://127.0.0.1:5000/upload', formData, {
+        axios.post(ip+'/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': 'Bearer ' + token

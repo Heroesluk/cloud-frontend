@@ -5,14 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloudIcon from '@mui/icons-material/Cloud';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {Link} from 'react-router-dom';
-import {IconButton} from "@mui/material";
-import {FileUploadOutlined} from "@mui/icons-material";
 
 export default function ButtonAppBar({visible, upload}) {
     let bar;

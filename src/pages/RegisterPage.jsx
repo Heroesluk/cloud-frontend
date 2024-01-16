@@ -2,15 +2,11 @@ import {Button, Stack, TextField} from "@mui/material";
 import * as React from "react";
 import {ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import {darkTheme, lightTheme} from "../App";
+import {darkTheme, ip, lightTheme} from "../App";
 import ButtonAppBar from "../Components/Bar";
-import Typography from "@mui/material/Typography";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {Background2} from "../Components/Background2";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export function Register() {
@@ -66,7 +62,7 @@ export function Register() {
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/register', data);
+            const response = await axios.post(ip+'/register', data);
             console.log('Registration successful:', response.data);
         } catch (error) {
             console.error('Error during registration:', error);
