@@ -84,12 +84,46 @@ const ImageEntry = ({ item, setModalOpen, setSelectedImage, onDelete }) => {
       </ImageListItem>
     );
   };
+  
+// const ImageEntry = ({item, setModalOpen, setSelectedImage}) => {
+//     const [disp, setDisp] = useState(0);
+//     const showButton = (e) => {
+//         e.preventDefault();
+//         setDisp(1);
+
+//     };
+
+//     const hideButton = (e) => {
+//         e.preventDefault();
+//         setDisp(0);
+
+//     };
+//     const handleImageClick = () => {
+//         setModalOpen(true);
+//         setSelectedImage(item);
+//     };
+//     return (
+//         <ImageListItem
+//             onMouseEnter={(e) => showButton(e)}
+//             onMouseLeave={(e) => hideButton(e)}
+//             key={item.url}>
+//             <Butt disp={disp}/>
+
+//             <img
+//                 onClick={handleImageClick}
+//                 srcSet={`${item.url}`}
+//                 src={`${item.url}`}
+//                 alt={item.name}
+//                 loading="lazy"
+//             />
+//         </ImageListItem>
+//     )
+// }
 
 export default function ImagesPage() {
     const token = document.cookie
     const [dt, setData] = useState(null);
-    const [upload, setUpload] = useState(false);    
-    const [searchQuery, setSearchQuery] = useState('');
+    const [upload, setUpload] = useState(false);
 
     // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTg2ODEyNSwianRpIjoiYWIzODVlZjQtZmFjZi00NTAyLThhMGQtYjQzZDg0YzJhYjJmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imx1a2FzejIiLCJuYmYiOjE3MDE4NjgxMjUsImV4cCI6MTcwMTg2OTAyNX0.25co44R2gimIIqoJANdHYtdudxqz3ZCiSWxVV52B0o4"
 
@@ -99,27 +133,15 @@ export default function ImagesPage() {
                 const response = await axios.get('http://127.0.0.1:8080/available_files', {
                     headers: {
                         'Authorization': 'Bearer ' + token
-                    },
-                params: {
-                  query: searchQuery
-              }
-          });
-          setData(response.data);
-          console.log(response.data);
-          return response.data;
+                    }
+                });
+                setData(response.data);
+                console.log(dt);
             } catch (error) {
                 console.error('Error during login:', error);
             }
         }
-    };
-    const handleSearch = async () => {
-      await fetch_data();
-  };
-
-  useEffect(() => {
-      fetch_data().then().finally();
-      console.log(dt);
-  }, [searchQuery]);
+    }
 
     useEffect(() => {
         // TODO: move this to external function
@@ -211,23 +233,6 @@ export default function ImagesPage() {
                     {/*</form>*/}
 
                 </IconButton>
-                {/* <TextField
-                label="Search by Name"
-                variant="outlined"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            /> */}
-            <TextField
-        label="Search by name"
-        onChange={(e) => setSearchQuery(e.target.value)}
-        value={searchQuery}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSearch();
-          }
-        }}
-      />
-            <Button onClick={handleSearch}>Search</Button>
 
                 <div style={{width: '65%'}}>
                     <Typography variant='h1' sx={{fontWeight: '500'}}>Your
