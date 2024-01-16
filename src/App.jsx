@@ -9,7 +9,7 @@ import ImagesPage from "./pages/ImagesPage";
 import {UploadForm} from "./pages/UploadPage";
 
 
-export const ip = "http://127.0.0.1:5000"
+export const ip = "https://cloud-backend-s3crlxaida-ew.a.run.app"
 
 
 export const darkTheme = createTheme({
