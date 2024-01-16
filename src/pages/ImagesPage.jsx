@@ -32,7 +32,7 @@ const Butt = ({disp}) => {
     );
 };
 const ImageEntry = ({item, setModalOpen, setSelectedImage, onDelete}) => {
-    console.log(item)
+    // console.log(item)
     const [disp, setDisp] = useState(0);
 
     const showButton = (e) => {

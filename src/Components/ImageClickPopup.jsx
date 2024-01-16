@@ -6,9 +6,6 @@ import * as React from "react";
 export function CustomModal({open, onClose, selectedImage}) {
     const {name, image_size, image_add_date, url} = selectedImage || {};
 
-    console.log(selectedImage)
-    console.log("huj")
-
     return (
         <Modal open={open} onClose={onClose}>
             <Box
