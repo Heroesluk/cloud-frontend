@@ -13,6 +13,7 @@ import axios from "axios";
 import {IconButton} from "@mui/material";
 import {FileUploadOutlined} from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TextField from '@mui/material/TextField';
 
 const Butt = ({disp}) => {
     return (
@@ -87,8 +88,7 @@ export default function ImagesPage() {
     const token = document.cookie
     const [dt, setData] = useState(null);
     const [upload, setUpload] = useState(false);
-
-    // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTg2ODEyNSwianRpIjoiYWIzODVlZjQtZmFjZi00NTAyLThhMGQtYjQzZDg0YzJhYjJmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imx1a2FzejIiLCJuYmYiOjE3MDE4NjgxMjUsImV4cCI6MTcwMTg2OTAyNX0.25co44R2gimIIqoJANdHYtdudxqz3ZCiSWxVV52B0o4"
+		const [searchQuery, setSearchQuery] = useState('');
 
     const fetch_data = async () => {
         if (token !== null) {
@@ -185,6 +185,12 @@ export default function ImagesPage() {
                     />
                 </IconButton>
 
+								<TextField
+									label="Search by name"
+									onChange={(e) => setSearchQuery(e.target.value)}
+									value={searchQuery}
+								/>
+
                 <div style={{width: '65%'}}>
                     <Typography variant='h1' sx={{fontWeight: '500'}}>Your
                         photos: </Typography>
@@ -192,7 +198,8 @@ export default function ImagesPage() {
 
                 <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
                     {dt &&
-                        dt.data.map((item) => (
+											dt.data.filter((element) => element.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .map((item) => (
                             <ImageEntry
                                 key={item.url}
                                 item={item}
