@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import {darkTheme, ip, lightTheme} from "../App";
 import ButtonAppBar from "../Components/Bar";
 import {Background2} from "../Components/Background2";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 export function Register() {
@@ -14,6 +14,7 @@ export function Register() {
     const [errorLogin, setLoginError] = React.useState(false);
     const [errorEmail, setEmailError] = React.useState(false);
     const [errorPassword, setPasswordError] = React.useState(false);
+    const navigate = useNavigate();
 
     const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     const loginPattern = /([A-aZ-z0-9]|_|-)+/
@@ -64,6 +65,7 @@ export function Register() {
         try {
             const response = await axios.post(ip+'/register', data);
             console.log('Registration successful:', response.data);
+            navigate("/images");
         } catch (error) {
             console.error('Error during registration:', error);
             errortext.innerText = 'An error occured!';
