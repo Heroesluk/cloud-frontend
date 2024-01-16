@@ -77,7 +77,7 @@ export default function ImagesPage() {
     const fetch_data = async () => {
         if (token !== null) {
             try {
-                const response = await axios.get('http://127.0.0.1:5000/available_files', {
+                const response = await axios.get('http://127.0.0.1:8080/available_files', {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
@@ -99,21 +99,27 @@ export default function ImagesPage() {
     }, []);
 
     const uploadImage = async () => {
-        try {
-            const response = axios.post('http://127.0.0.1:5000/upload', {
-                'file': document.getElementById('file-selector').files[0]
-            }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + token
-                }
-            }).then(fetch_data().then().finally()).finally();
-            console.log('Image uploaded successfully: ', response);
-            setUpload(!upload)
-        } catch (error) {
-          console.error('Error uploading image:', error);
-        }
-      };
+			const files = document.getElementById('file-selector').files;
+
+			for (let i = 0; i < files.length; i++) {
+					try {
+							const formData = new FormData();
+							formData.append('file', files[i]);
+	
+							await axios.post('http://127.0.0.1:5000/upload', formData, {
+									headers: {
+											'Content-Type': 'multipart/form-data',
+											'Authorization': 'Bearer ' + token
+									}
+							});    
+							await fetch_data();
+							console.log('Image uploaded successfully: ', response);
+							setUpload(!upload)
+					} catch (error) {
+							console.error('Error uploading image:', error);
+					}
+			}
+		};
 
     const [modalOpen, setModalOpen] = React.useState(false);
     const [selectedImage, setSelectedImage] = React.useState(null);
@@ -141,7 +147,8 @@ export default function ImagesPage() {
                         type="file"
                         style={{ display: 'none' }}
                         onChange={uploadImage}
-                        accept="image/*"
+                        accept="image/*, application/zip"
+                        multiple
                     />
 
                     {/*this could be left for demo if ok*/}
