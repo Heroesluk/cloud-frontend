@@ -43,15 +43,6 @@ export function CustomModal({open, onClose, selectedImage}) {
                     <Typography variant="caption">{name}</Typography>
                     <Typography variant="caption">{`Size: ${image_size}`}</Typography>
                     <Typography variant="caption">{`Date Added: ${image_add_date}`}</Typography>
-                    <IconButton
-                        onClick={() => window.open(url, "_blank")}
-                        style={{color: "black"}}
-                    >
-                        <GetAppIcon/>
-                        <Typography variant="caption" sx={{marginLeft: 1}}>
-                            Download
-                        </Typography>
-                    </IconButton>
                 </Box>
 
             </Box>
