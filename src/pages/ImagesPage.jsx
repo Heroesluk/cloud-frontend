@@ -161,7 +161,7 @@ export default function ImagesPage() {
     // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
             <CssBaseline/>
-            <ButtonAppBar></ButtonAppBar>
+            <ButtonAppBar upload={true}></ButtonAppBar>
             <Container maxWidth={false}
                        sx={{
                            display: 'flex',

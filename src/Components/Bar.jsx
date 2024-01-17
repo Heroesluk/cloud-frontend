@@ -5,9 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloudIcon from '@mui/icons-material/Cloud';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function ButtonAppBar({visible, upload}) {
+    const navigate = useNavigate();
+
     let bar;
     if (visible) {
         bar = 'rgba(0,0,0,0.5)';
@@ -25,10 +27,10 @@ export default function ButtonAppBar({visible, upload}) {
                     sx={{mr: 2}}
                 >
                     <CloudIcon style={{fontSize: "60px"}}/>
-                    </Box>
-                    <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
-                        <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
-                    </Typography>
+                </Box>
+                <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
+                    <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
+                </Typography>
 
                 <Box
                     display="flex"
@@ -56,11 +58,28 @@ export default function ButtonAppBar({visible, upload}) {
                         component={Link}
                         to="/register">
                         Sign up </Button></>) : null}
+
+                {upload ? (<><Button sx={{
+                    ml: 3,
+                    pl: 1.5,
+                    pr: 1.5,
+                    backgroundColor: "white",
+                    color: "black", borderRadius: 0,
+                }}
+                                     onClick={fix}>Logout</Button></>) : null}
+
             </Toolbar>
         </AppBar>
 
 
     );
+
+    function fix() {
+        console.log("dziala")
+        document.cookie = "";
+        navigate("/")
+
+    }
 
 
 }
