@@ -95,10 +95,40 @@ export function Register() {
                         <div style={{color: "black", fontSize: "1.8vh", textAlign: "center"}}>Register to ImageCloud
                         </div>
                         <div id='errortext' style={{wordWrap: 'break-word', width: "300px", color: "red", fontSize: "1.8vh", textAlign: "center"}}></div>
-                        <TextField required id="login" error={errorLogin} label="login" variant="outlined"/>
-                        <TextField required id="email" error={errorEmail} label="email" variant="outlined"/>
-                        <TextField required id="password" type="password" error={errorPassword} label="password" variant="outlined"/>
-                        <TextField required id="rpassword" type="password" error={errorPassword} label="repeat password" variant="outlined"/>
+                        <TextField
+                            required
+                            id="login"
+                            error={errorLogin}
+                            label="login"
+                            variant="outlined"
+                            onKeyDown={(e) => {if (e.key === 'Enter') {handleRegister();}}}
+                        />
+                        <TextField
+                            required
+                            id="email"
+                            error={errorEmail}
+                            label="email"
+                            variant="outlined"
+                            onKeyDown={(e) => {if (e.key === 'Enter') {handleRegister();}}}
+                        />
+                        <TextField
+                            required
+                            id="password"
+                            type="password"
+                            error={errorPassword}
+                            label="password"
+                            variant="outlined"
+                            onKeyDown={(e) => {if (e.key === 'Enter') {handleRegister();}}}
+                        />
+                        <TextField
+                            required
+                            id="rpassword"
+                            type="password"
+                            error={errorPassword}
+                            label="repeat password"
+                            variant="outlined"
+                            onKeyDown={(e) => {if (e.key === 'Enter') {handleRegister();}}}
+                        />
 
                         <Button variant="contained" onClick={handleRegister}>Confirm</Button>
                         <div style={{color: "black", fontSize: "1.3vh", textAlign: "center"}}>
