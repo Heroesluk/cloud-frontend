@@ -26,7 +26,7 @@ export default function ButtonAppBar({visible, upload}) {
                     aria-label="menu"
                     sx={{mr: 2}}
                 >
-                    <CloudIcon style={{fontSize: "60px"}}/>
+                <CloudIcon style={{fontSize: "60px"}}/>
                 </Box>
                 <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                     <Box sx={{fontWeight: 'bold'}}> ImageCloud</Box>
@@ -43,8 +43,8 @@ export default function ButtonAppBar({visible, upload}) {
                     pl: 1.5,
                     pr: 1.5
                 }} color="inherit"
-                                      component={Link}
-                                      to="/login">
+                    component={Link}
+                    to="/login">
                     Login
                 </Button>
                     <Button
@@ -66,20 +66,17 @@ export default function ButtonAppBar({visible, upload}) {
                     backgroundColor: "white",
                     color: "black", borderRadius: 0,
                 }}
-                                     onClick={fix}>Logout</Button></>) : null}
+                onClick={logout}>Logout</Button></>) : null}
 
             </Toolbar>
         </AppBar>
 
-
     );
 
-    function fix() {
-        console.log("dziala")
+    function logout() {
         document.cookie = "";
         navigate("/")
 
     }
-
 
 }

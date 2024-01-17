@@ -33,7 +33,6 @@ const Butt = ({disp, name}) => {
     );
 };
 const ImageEntry = ({item, setModalOpen, setSelectedImage, onDelete}) => {
-    // console.log(item)
     const [disp, setDisp] = useState(0);
 
     const showButton = (e) => {
@@ -88,7 +87,7 @@ export default function ImagesPage() {
     const token = document.cookie
     const [dt, setData] = useState(null);
     const [upload, setUpload] = useState(false);
-		const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const fetch_data = async () => {
         if (token !== null) {
@@ -99,7 +98,7 @@ export default function ImagesPage() {
                     }
                 });
                 setData(response.data);
-                console.log(response.data);
+                console.log('Data loading successful: ', response.data);
             } catch (error) {
                 console.error('Error during login:', error);
             }
@@ -108,10 +107,7 @@ export default function ImagesPage() {
 
     useEffect(() => {
         // TODO: move this to external function
-
         fetch_data().then().finally();
-        console.log(dt);
-
     }, []);
 
     const uploadImage = async () => {
@@ -153,12 +149,12 @@ export default function ImagesPage() {
             );
 
             await fetch_data();
+            console.log('Successfully deleted an image.');
         } catch (error) {
             console.error('Error deleting image:', error.response || error.message || error);
         }
     };
 
-    // const ar = shuffle(itemData)
     return (<ThemeProvider theme={lightTheme}>
             <CssBaseline/>
             <ButtonAppBar upload={true}></ButtonAppBar>
@@ -199,7 +195,7 @@ export default function ImagesPage() {
 
                 <ImageList variant="masonry" sx={{width: '65%'}} cols={3}>
                     {dt &&
-											dt.data.filter((element) => element.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        dt.data.filter((element) => element.name.toLowerCase().includes(searchQuery.toLowerCase()))
                         .map((item) => (
                             <ImageEntry
                                 key={item.url}
