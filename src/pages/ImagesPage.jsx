@@ -14,6 +14,7 @@ import {IconButton} from "@mui/material";
 import {FileUploadOutlined} from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from '@mui/material/TextField';
+import {useNavigate} from "react-router-dom";
 
 const Butt = ({disp, name}) => {
     return (
@@ -88,20 +89,28 @@ export default function ImagesPage() {
     const [dt, setData] = useState(null);
     const [upload, setUpload] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     const fetch_data = async () => {
-        if (token !== null) {
-            try {
-                const response = await axios.get(ip + '/available_files', {
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                });
-                setData(response.data);
-                console.log('Data loading successful: ', response.data);
-            } catch (error) {
-                console.error('Error during login:', error);
-            }
+        if (token === '') {
+            navigate('/login');
+            return;
+        }
+
+        try {
+            const response = await axios.get(ip + '/available_files', {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+            setData(response.data);
+            console.log('Data loading successful: ', response.data);
+        } catch (error) {
+            console.error('Error during login:', error);
+            
+            // log out
+            document.cookie = ''
+            navigate('/login');
         }
     }
 
